@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,5 +29,11 @@ public class BookController {
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         Optional<Book> book = bookService.findById(id);
         return book.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> save(@RequestBody Book book) {
+        Book savedBook = bookService.save(book);
+        return ResponseEntity.ok(savedBook);
     }
 }
