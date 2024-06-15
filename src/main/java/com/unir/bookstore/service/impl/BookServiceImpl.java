@@ -29,4 +29,19 @@ public class BookServiceImpl implements BookService {
     public Book save(Book book) {
         return bookRepository.save(book);
     }
+    
+    @Override
+    public Book update(Long id, Book book) {
+        Optional<Book> optionalLibro = bookRepository.findById(id);
+        if (!optionalLibro.isPresent()) {
+            throw new RuntimeException("El libro con id " + id + " no encontrado");
+        }
+
+        Book libroExistente = optionalLibro.get();
+        libroExistente.setTitle(book.getTitle());
+        libroExistente.setAuthor(book.getAuthor());
+        libroExistente.setPrice(book.getPrice());
+
+        return bookRepository.save(libroExistente);
+    }
 }

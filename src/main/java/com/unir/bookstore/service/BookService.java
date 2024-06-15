@@ -12,4 +12,6 @@ public interface BookService {
     Optional<Book> findById(Long id);
 
     Book save(Book book);
+
+    Book update(Long id, Book book);
 }

@@ -36,4 +36,14 @@ public class BookController {
         Book savedBook = bookService.save(book);
         return ResponseEntity.ok(savedBook);
     }
+
+    // Método PUT para actualizar un libro existente
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> actualizarLibro(
+            @PathVariable Long id,
+            @RequestBody Book libroActualizado) {
+
+        Book libro = bookService.update(id, libroActualizado);
+        return ResponseEntity.ok(libro);
+    }
 }
